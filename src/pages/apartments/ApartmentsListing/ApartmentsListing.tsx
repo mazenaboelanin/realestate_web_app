@@ -20,6 +20,13 @@ export const ApartmentsListing = () => {
     fetchApartments();
   }, []);
 
+
+  const navigate = useNavigate();
+
+  function handleClick(id: number) {
+    navigate(`/apartments/${id}`);
+  }
+
   return (
     <div>
       <h1>ApartmentsListing</h1>
@@ -27,6 +34,7 @@ export const ApartmentsListing = () => {
         {apartments.map((apartment) => (
           <li 
             key={apartment.id} 
+            onClick={handleClick.bind(null, apartment?.id)}
           >
             {apartment?.title}
           </li>
