@@ -32,7 +32,7 @@ const ApartmentDetails = () => {
 
   return (
     <>
-    <Box sx={{ width: '100%' }}>
+    <Box my={4} sx={{ width: '100%' }}>
       <img src={apartment?.imageUrl} alt='apartment' className={classes.image}></img>
       <Typography variant="h3" gutterBottom>
         {apartment?.title}
