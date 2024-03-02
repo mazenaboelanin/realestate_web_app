@@ -1,6 +1,8 @@
 {
   "name": "realestate_web_app",
   "version": "0.1.0",
+  "description": "A Real Estate web app that lists apartments and details about them",
+  "author": "Mazen Abo Elanin",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
