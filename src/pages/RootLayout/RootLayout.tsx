@@ -6,11 +6,15 @@ import {  Container } from '@mui/material';
 
 const RootLayout = () => {
   return (
-      <Container maxWidth="sm">
+      
+        <>
         <Header />
-        <Outlet />
+        <Container maxWidth="sm">
+          <Outlet />
+        </Container>
         <Footer />
-      </Container>
+        </>
+
   );
 }
 
