@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Apartment from "../../../models/Apartment";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
+import classes  from './ApartmentsListing.module.css';
+
 
 export const ApartmentsListing = () => {
   const [apartments, setApartments] = useState<Apartment[]>([]);
@@ -28,18 +31,30 @@ export const ApartmentsListing = () => {
   }
 
   return (
-    <div>
-      <h1>ApartmentsListing</h1>
-      <ul>
-        {apartments.map((apartment) => (
-          <li 
-            key={apartment.id} 
-            onClick={handleClick.bind(null, apartment?.id)}
-          >
+    <>
+    {apartments.map((apartment) => (
+        <Card sx={{ maxWidth: 500 }}  key={apartment.id} className={classes.margin}>
+        <CardMedia
+          sx={{ height: 200 }}
+          image={apartment?.imageUrl}
+          title={apartment?.title}
+        />
+        <CardContent>
+          <Typography  variant="h5" component="div">
             {apartment?.title}
-          </li>
+          </Typography>
+          <Typography>
+            Compound: {apartment?.compound}
+          </Typography>
+          <Typography>
+            Price: {apartment?.price}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={handleClick.bind(null, apartment?.id)}>Apartment Details</Button>
+        </CardActions>
+        </Card>
         ))}
-      </ul>
-    </div>
+    </>
   );
 };
