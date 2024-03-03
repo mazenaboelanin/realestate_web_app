@@ -17,29 +17,52 @@ import StraightenIcon from '@mui/icons-material/Straighten';
 const ApartmentDetails: React.FC = () => {
   const [apartment, setApartment] = useState<Apartment>();
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   useEffect(() => {
     async function fetchApartmentById(): Promise<void> {
       try {
+        setIsLoading(true);
         const res = await axios(`http://localhost:5000/api/v1/apartments/${id}`);
         setApartment(res.data.response);
       } catch (error) {
         throw new Error('Error fetching apartment by id');
       }
+      setIsLoading(false);
     }
     fetchApartmentById();
   }, [id]);
 
   return (
     <>
-    <Box my={4} sx={{ width: '100%' }}>
-      <img src={apartment?.imageUrl} alt='apartment' className={classes.image}></img>
+    {/* Case: Loading */}
+    {
+      isLoading && 
+      <Box>
+      <Typography variant="h3" gutterBottom>
+        Loading...
+      </Typography>
+      </Box>
+    }
+
+    {/* Case: No Apartment */}
+    { !isLoading && !apartment && <Box>
+      <Typography variant="h3" gutterBottom>
+        No Apartment Found
+      </Typography>
+    </Box>}
+
+
+    {/* Case: Apartment exists */}
+    { !isLoading && apartment && (
+      <Box my={4} sx={{ width: '100%' }}>
       <Typography variant="h3" gutterBottom>
         {apartment?.title}
       </Typography>
+      <img src={apartment?.imageUrl} alt='apartment' className={classes.image}></img>
       <Box className={classes.infoCard}>
       <Typography variant="body1" gutterBottom>
-      <text className={classes.fieldTitle}>Description:</text>
+      <span className={classes.fieldTitle}>Description:</span>
       {apartment?.description.reception} reception, {apartment?.description.rooms} rooms, {apartment?.description.bathrooms} bathrooms, {apartment?.description.kitchens} kitchens.
       </Typography>
       <Typography variant="body1" gutterBottom>
@@ -68,6 +91,7 @@ const ApartmentDetails: React.FC = () => {
       </Typography>
       </Box>
     </Box>
+    )}
     </>
   );
 };
