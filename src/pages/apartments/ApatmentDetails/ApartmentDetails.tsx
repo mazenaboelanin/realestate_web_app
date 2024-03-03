@@ -12,6 +12,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PaymentIcon from '@mui/icons-material/Payment';
 import StraightenIcon from '@mui/icons-material/Straighten';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 
 const ApartmentDetails: React.FC = () => {
@@ -61,33 +62,50 @@ const ApartmentDetails: React.FC = () => {
       </Typography>
       <img src={apartment?.imageUrl} alt='apartment' className={classes.image}></img>
       <Box className={classes.infoCard}>
+        <Typography variant="body1" gutterBottom>
+        <DescriptionIcon color="primary" />
+          <span className={classes.fieldTitle}>Description:</span>
+          <span className={classes.block}>
+          <span className={classes.detailValue} > {apartment?.description.reception} reception</span>
+          <span className={classes.detailValue}> {apartment?.description.rooms} rooms</span>
+          <span className={classes.detailValue}> {apartment?.description.bathrooms} bathrooms</span>
+          <span className={classes.detailValue}> {apartment?.description.kitchens} kitchens.</span>
+          </span>
+        </Typography>
       <Typography variant="body1" gutterBottom>
-      <span className={classes.fieldTitle}>Description:</span>
-      {apartment?.description.reception} reception, {apartment?.description.rooms} rooms, {apartment?.description.bathrooms} bathrooms, {apartment?.description.kitchens} kitchens.
+        <HomeIcon color="primary" />
+        <span className={classes.fieldTitle}>Compound:</span> 
+        <span className={classes.detailValue}>{apartment?.compound}</span>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <HomeIcon /><text className={classes.fieldTitle}>Compound:</text> {apartment?.compound}
+        <CurrencyPoundIcon color="primary" />
+        <span className={classes.fieldTitle}>Price:</span>
+        <span className={classes.detailValue}>{apartment?.price}</span>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <CurrencyPoundIcon /> <text className={classes.fieldTitle}>Price:</text> {apartment?.price}
+        <StraightenIcon color="primary"/>
+        <span className={classes.fieldTitle}>Area:</span>
+        <span className={classes.detailValue}>{apartment?.area}</span>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <div className={classes.iconWrapper}>
-          <StraightenIcon  color="primary"/>
-        </div>
-        <text className={classes.fieldTitle}>Area:</text> {apartment?.area}
+      <LocationCityIcon color="primary"/>
+      <span className={classes.fieldTitle}>City:</span>
+      <span className={classes.detailValue}>{apartment?.city}</span>
       </Typography>
       <Typography variant="body1" gutterBottom>
-      <LocationCityIcon/> <text className={classes.fieldTitle}>City:</text> {apartment?.city}
+        <LocalPhoneIcon color="primary" />
+        <span className={classes.fieldTitle}>Phone Number:</span> 
+        <span className={classes.detailValue} >{apartment?.phoneNumber}</span>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <LocalPhoneIcon /> <text className={classes.fieldTitle}>Phone Number:</text> {apartment?.phoneNumber}
+        <PaymentIcon color="primary"/>
+        <span className={classes.fieldTitle}>Payment Type:</span>
+        <span className={classes.detailValue}>{apartment?.paymentType}</span>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <PaymentIcon/><text className={classes.fieldTitle}>Payment Type:</text>{apartment?.paymentType}
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-      <CheckCircleIcon/> <text className={classes.fieldTitle}>Finished:</text> {apartment?.finished ? 'Yes' : 'No'}
+      <CheckCircleIcon color="primary"/>
+      <span className={classes.fieldTitle}>Finished:</span> 
+      <span className={classes.detailValue}>{apartment?.finished ? 'Yes' : 'No'}</span>
       </Typography>
       </Box>
     </Box>

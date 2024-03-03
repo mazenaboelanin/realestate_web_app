@@ -6,6 +6,8 @@
 .fieldTitle {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #014384;
+  margin-left: 5px;
 }
 
 .infoCard {
@@ -14,6 +16,20 @@
   border-radius: 10px;
 }
 
+.detailValue {
+  border-bottom:1px solid #014384  ;
+  color: #014384;
+  margin-left: 10px;
+}
+
+.detailIcon {
+  color: #014384;
+}
+
+.block {
+  display: block;
+  text-align: center;
+}
 .iconWrapper {
   border-radius: 50%;
   padding: 5px;
