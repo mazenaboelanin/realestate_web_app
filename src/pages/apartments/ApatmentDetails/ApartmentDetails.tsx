@@ -14,12 +14,12 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import StraightenIcon from '@mui/icons-material/Straighten';
 
 
-const ApartmentDetails = () => {
+const ApartmentDetails: React.FC = () => {
   const [apartment, setApartment] = useState<Apartment>();
   const { id } = useParams();
 
   useEffect(() => {
-    async function fetchApartmentById() {
+    async function fetchApartmentById(): Promise<void> {
       try {
         const res = await axios(`http://localhost:5000/api/v1/apartments/${id}`);
         setApartment(res.data.response);

@@ -6,11 +6,11 @@ import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid
 import classes  from './ApartmentsListing.module.css';
 
 
-export const ApartmentsListing = () => {
+export const ApartmentsListing: React.FC = () => {
   const [apartments, setApartments] = useState<Apartment[]>([]);
 
   useEffect(() => {
-    async function fetchApartments() {
+    async function fetchApartments(): Promise<void>{
       try {
         const res = await axios.get('http://localhost:5000/api/v1/apartments');
         console.log(res.data.response);
