@@ -3,7 +3,7 @@ import './App.css';
 import RootLayout from './pages/RootLayout/RootLayout';
 import { ApartmentsListing } from './pages/apartments/ApartmentsListing/ApartmentsListing';
 import ApartmentDetails from './pages/apartments/ApatmentDetails/ApartmentDetails';
-import { NotFound } from './components/NotFound/NotFound';
+import { NotFound } from './pages/NotFound/NotFound';
 
 const router = createBrowserRouter([
   {
