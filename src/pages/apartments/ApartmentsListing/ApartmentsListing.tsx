@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import Apartment from "../../../models/Apartment";
 import { ApartmentListCard } from "../../../components/ApartmentListCard/ApartmentListCard";
 import { Loading } from "../../../components/Loading/Loading";
@@ -9,18 +11,31 @@ import { useFetch } from "../../../hooks/useFetch";
 
 
 export const ApartmentsListing: React.FC = () => {
-  // const [page, setPage] = useState(1);
-  // const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-  //   setPage(value);
-  // };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const pageFromUrl = Number(queryParams.get('page')) || 1;
+  const [currentPage, setCurrentPage] = useState(pageFromUrl);
+
+  const handleCurrentPageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
+    queryParams.set('page', String(value));
+    navigate({ search: queryParams.toString() });
+  };
 
   const { fetchedData: apartments,
     isLoading,
     error
-  } = useFetch<Apartment[]>('http://localhost:5000/api/v1/apartments', []);
+  } = useFetch<Apartment[]>(`http://localhost:5000/api/v1/apartments?page=${currentPage}&countPerPage=${10}`, [], [currentPage]);
 
   return (
     <>
+
+    <Stack spacing={2} style={{ paddingTop: '16px'}}>
+      <Typography style={{ textAlign: 'center'}}>Page: {currentPage}</Typography>
+      <Pagination count={10} page={currentPage} onChange={handleCurrentPageChange} />
+    </Stack>
+
     {/* Case: Error */}
     { !isLoading && error && <Error> { error?.message } </Error> }
 
