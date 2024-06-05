@@ -1,31 +1,23 @@
 import { useEffect, useState } from "react";
 import Apartment from "../../../models/Apartment";
-import axios from "axios";
 import { ApartmentListCard } from "../../../components/ApartmentListCard/ApartmentListCard";
 import { Loading } from "../../../components/Loading/Loading";
 import { EmptyState } from "../../../components/EmptyState/EmptyState";
 import { Error } from "../../../components/Error/Error";
+import { Pagination, Stack, Typography } from "@mui/material";
+import { useFetch } from "../../../hooks/useFetch";
 
 
 export const ApartmentsListing: React.FC = () => {
-  const [apartments, setApartments] = useState<Apartment[]>([]);
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  // const [page, setPage] = useState(1);
+  // const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  //   setPage(value);
+  // };
 
-  useEffect(() => {
-    async function fetchApartments(): Promise<void>{
-      try {
-        setIsLoading(true);
-        const res = await axios.get('http://localhost:5000/api/v1/apartments');
-        console.log(res.data.response);
-        setApartments(res.data.response);
-      } catch (error) {
-        throw new Error('Error fetching apartments');
-      }
-      setIsLoading(false);
-    }
-    fetchApartments();
-  }, []);
-
+  const { fetchedData: apartments,
+    isLoading,
+    error
+  } = useFetch<Apartment[]>('http://localhost:5000/api/v1/apartments', []);
 
   return (
     <>

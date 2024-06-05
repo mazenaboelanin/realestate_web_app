@@ -1,32 +1,24 @@
 // get Apartment id from the URl
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Apartment from '../../../models/Apartment';
-import axios from 'axios';
 import { ApartmentDetailsCard } from '../../../components/ApartmentDetailsCard/ApartmentDetailsCard';
 import { Loading } from '../../../components/Loading/Loading';
 import { EmptyState } from '../../../components/EmptyState/EmptyState';
+import { useFetch } from '../../../hooks/useFetch';
+import { InitialApartment } from '../../../models/InitialApartment';
 import { Error } from '../../../components/Error/Error';
 
 
-const ApartmentDetails: React.FC = () => {
-  const [apartment, setApartment] = useState<Apartment>();
-  const { id } = useParams();
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+const INITIAL_APARTMENT = InitialApartment;
 
-  useEffect(() => {
-    async function fetchApartmentById(): Promise<void> {
-      try {
-        setIsLoading(true);
-        const res = await axios(`http://localhost:5000/api/v1/apartments/${id}`);
-        setApartment(res.data.response);
-      } catch (error) {
-        throw new Error('Error fetching apartment by id');
-      }
-      setIsLoading(false);
-    }
-    fetchApartmentById();
-  }, [id]);
+const ApartmentDetails: React.FC = () => {
+  const { id } = useParams();
+
+  const { 
+    fetchedData: apartment, 
+    isLoading,
+    error 
+  } = useFetch<Apartment>(`http://localhost:5000/api/v1/apartments/${id}`, INITIAL_APARTMENT , [id]);
 
   return (
     <>
