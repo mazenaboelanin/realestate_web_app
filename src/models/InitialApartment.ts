@@ -3,6 +3,7 @@ export const InitialApartment = {
     title: '',
     imageUrl: '',
     description: {
+      info: '',
       rooms: 0,
       bathrooms: 0,
       kitchens: 0,
@@ -15,5 +16,6 @@ export const InitialApartment = {
     phoneNumber: '',
     paymentType: '',
     finished: false,
+    finishedDate: new Date()
   
 };

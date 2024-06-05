@@ -3,6 +3,7 @@ interface Apartment {
   title: string;
   imageUrl: string;
   description: {
+    info: string;
     rooms: number;
     bathrooms: number;
     kitchens: number;
@@ -15,6 +16,7 @@ interface Apartment {
   phoneNumber: string;
   paymentType: string;
   finished: boolean;
+  finishedDate: Date;
 };
 
 export default Apartment;
