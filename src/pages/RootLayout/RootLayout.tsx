@@ -9,7 +9,7 @@ const RootLayout = () => {
       
         <>
         <Header />
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" style={{ minHeight: '70vh'}}>
           <Outlet />
         </Container>
         <Footer />
