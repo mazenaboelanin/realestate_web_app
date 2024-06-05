@@ -6,6 +6,7 @@ import axios from 'axios';
 import { ApartmentDetailsCard } from '../../../components/ApartmentDetailsCard/ApartmentDetailsCard';
 import { Loading } from '../../../components/Loading/Loading';
 import { EmptyState } from '../../../components/EmptyState/EmptyState';
+import { Error } from '../../../components/Error/Error';
 
 
 const ApartmentDetails: React.FC = () => {
@@ -29,15 +30,19 @@ const ApartmentDetails: React.FC = () => {
 
   return (
     <>
+
+    {/* Case: Error */}
+    { !isLoading && error && <Error> { error?.message } </Error> }
+    
     {/* Case: Loading */}
-    { isLoading && <Loading /> }
+    { isLoading && !error && <Loading/> }
 
     {/* Case: No Apartment */}
-    { !isLoading && !apartment && <EmptyState /> }
+    { !isLoading && !error && !apartment && <EmptyState /> }
 
 
     {/* Case: Apartment exists */}
-    { !isLoading && apartment && <ApartmentDetailsCard apartment={apartment} /> }
+    { !isLoading && !error && apartment && <ApartmentDetailsCard apartment={apartment} /> }
     </>
   );
 };

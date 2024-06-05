@@ -4,6 +4,7 @@ import axios from "axios";
 import { ApartmentListCard } from "../../../components/ApartmentListCard/ApartmentListCard";
 import { Loading } from "../../../components/Loading/Loading";
 import { EmptyState } from "../../../components/EmptyState/EmptyState";
+import { Error } from "../../../components/Error/Error";
 
 
 export const ApartmentsListing: React.FC = () => {
@@ -28,14 +29,17 @@ export const ApartmentsListing: React.FC = () => {
 
   return (
     <>
+    {/* Case: Error */}
+    { !isLoading && error && <Error> { error?.message } </Error> }
+
     {/* Case: Loading */}
-    { isLoading && <Loading /> }
+    { isLoading && !error && <Loading/> }
 
     {/* Case: No Apartment */}
-    { !isLoading && apartments.length === 0 && <EmptyState /> }
+    { !isLoading && !error && apartments.length === 0 && <EmptyState /> }
 
     {/* Case: Apartment exists */}
-    { !isLoading && apartments.length > 0 && 
+    { !isLoading && !error && apartments.length > 0 && 
       (
         <>
         {apartments.map((apartment) => (
