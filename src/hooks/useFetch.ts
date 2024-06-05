@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 type FetchState<T> = {
   fetchedData: T;
+  metaData: {totalPages: number};
   isLoading: boolean;
   error: any;
 };
@@ -11,7 +12,7 @@ export const useFetch = <T>(url: string, initialData: T, dependencies: any[] = [
   const [fetchedData, setFetchedData] = useState<T>(initialData);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<any | null>(null);
-  // const [page, setPage] = useState(1);
+  const [metaData, setMetaData] = useState<any | null>(null);
 
   useEffect(() => {
     async function fetchData(): Promise<void>{
@@ -19,7 +20,8 @@ export const useFetch = <T>(url: string, initialData: T, dependencies: any[] = [
       try {
         const res = await axios.get(url);
         console.log(res.data.response);
-        setFetchedData(res.data.response);
+        setFetchedData(res.data.response?.data);
+        setMetaData(res.data.response?.meta);
       } catch (error) {
         setError(error);
       }
@@ -29,5 +31,5 @@ export const useFetch = <T>(url: string, initialData: T, dependencies: any[] = [
     fetchData();
   }, [url, ...dependencies]);
 
-  return { fetchedData, isLoading, error };
+  return { fetchedData, metaData, isLoading, error };
 }

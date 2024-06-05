@@ -24,17 +24,23 @@ export const ApartmentsListing: React.FC = () => {
   };
 
   const { fetchedData: apartments,
+    metaData,
     isLoading,
     error
-  } = useFetch<Apartment[]>(`http://localhost:5000/api/v1/apartments?page=${currentPage}&countPerPage=${10}`, [], [currentPage]);
+  } = useFetch<Apartment[]>(`http://localhost:5000/api/v1/apartments?page=${currentPage}&countPerPage=${5}`, [], [currentPage]);
 
   return (
     <>
 
-    <Stack spacing={2} style={{ paddingTop: '16px'}}>
-      <Typography style={{ textAlign: 'center'}}>Page: {currentPage}</Typography>
-      <Pagination count={10} page={currentPage} onChange={handleCurrentPageChange} />
-    </Stack>
+    {
+      !isLoading && !error && apartments.length > 0 &&
+      <Stack spacing={2} style={{ paddingTop: '16px'}}>
+        <Typography style={{ textAlign: 'center'}}>Page: {currentPage}</Typography>
+        <Pagination count={metaData?.totalPages} page={currentPage} onChange={handleCurrentPageChange} />
+      </Stack>
+    }
+
+
 
     {/* Case: Error */}
     { !isLoading && error && <Error> { error?.message } </Error> }
