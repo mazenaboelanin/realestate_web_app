@@ -1,3 +1,57 @@
 .margin {
   margin: 20px;
 }
+
+.title {
+  color: #052f56
+}
+
+.compound {
+  color: #6d747b;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.price {
+    background:  #cadded;;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #254b64;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #254b64;
+
+}
+
+.area {
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  background: #cadded;
+  color: #254b64;
+  width: fit-content;
+  padding: 5px 10px;
+  border: 1px solid #254b64;
+
+  border-radius: 5px;
+  margin-right: 10px !important;
+}
+
+.info {
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #454444;
+}
+
+.phoneNumber {
+  display: flex;
+  justify-content: flex-end;
+  background:  #cadded;;
+  border-radius: 50%;
+  color: #254b64;
+  padding: 5px;
+  float: right
+}
