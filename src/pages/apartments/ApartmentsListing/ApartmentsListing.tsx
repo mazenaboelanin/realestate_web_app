@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Apartment from "../../../models/Apartment";
-import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { ApartmentListCard } from "../../../components/ApartmentListCard/ApartmentListCard";
+import { Loading } from "../../../components/Loading/Loading";
+import { EmptyState } from "../../../components/EmptyState/EmptyState";
 
 
 export const ApartmentsListing: React.FC = () => {
@@ -25,44 +26,24 @@ export const ApartmentsListing: React.FC = () => {
   }, []);
 
 
-  const navigate = useNavigate();
-
-  function handleClick(id: number) {
-    navigate(`/apartments/${id}`);
-  }
-
   return (
     <>
-
     {/* Case: Loading */}
-    {
-      isLoading && 
-      <Box>
-      <Typography variant="h3" gutterBottom>
-        Loading...
-      </Typography>
-      </Box>
-    }
+    { isLoading && <Loading /> }
 
     {/* Case: No Apartment */}
-    { !isLoading && apartments.length === 0 && <Box>
-      <Typography variant="h3" gutterBottom>
-        No Apartment Found
-      </Typography>
-      </Box>
-    }
+    { !isLoading && apartments.length === 0 && <EmptyState /> }
 
     {/* Case: Apartment exists */}
-    { !isLoading && apartments.length > 0 && (
-      <>
-      {apartments.map((apartment) => (
-        <ApartmentListCard apartment={apartment} />
-      ))}
-      </>
-    )
+    { !isLoading && apartments.length > 0 && 
+      (
+        <>
+        {apartments.map((apartment) => (
+          <ApartmentListCard apartment={apartment} />
+        ))}
+        </>
+      )
     }
-
-    
     </>
   );
 };
