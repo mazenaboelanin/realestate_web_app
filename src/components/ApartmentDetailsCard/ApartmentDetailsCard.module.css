@@ -1,6 +1,7 @@
 .image {
-  width: 100%;
-  height: 100%;
+  width: 80%; 
+  height: 80vh; 
+  /* background-size: cover; */
 }
 
 .fieldTitle {
@@ -8,6 +9,19 @@
   font-weight: bold;
   color: #014384;
   margin-left: 5px;
+}
+
+.info {
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #454444;
+}
+
+.infoTitle {
+  font-weight: bold;
+  font-size: 2rem;
+  color: #052f56;
 }
 
 .infoCard {
@@ -36,4 +50,18 @@
   background: #85c6ff;
   display: inline;
   margin-right: 10px;
+}
+
+.details {
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  background: #cadded;
+  color: #254b64;
+  width: fit-content;
+  padding: 5px 10px;
+  border: 1px solid #254b64;
+  border-radius: 5px;
+  margin-right: 10px !important;
+
 }

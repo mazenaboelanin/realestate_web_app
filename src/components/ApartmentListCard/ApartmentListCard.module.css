@@ -53,5 +53,7 @@
   border-radius: 50%;
   color: #254b64;
   padding: 5px;
-  float: right
+  float: right;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
