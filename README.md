@@ -22,7 +22,7 @@ You will find a screenshot folder at the project root have imgs of the whole des
 
 ## Installation
 
-Before you can run this project, you must have Node.js, npm, and React Native CLI or Expo CLI installed on your machine.
+Before you can run this project, you must have Node.js, npm on your machine.
 
 1. Clone this repository:
 
