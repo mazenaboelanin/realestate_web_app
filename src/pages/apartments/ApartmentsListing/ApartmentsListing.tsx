@@ -53,7 +53,10 @@ export const ApartmentsListing: React.FC = () => {
     { isLoading && !error && <Loading/> }
 
     {/* Case: No Apartment */}
-    { !isLoading && !error && apartments.length === 0 && <EmptyState /> }
+    { !isLoading && !error && apartments.length === 0 && 
+    <EmptyState text="Please reload Again" canReload={true}>
+      <span> no Apartment Found </span>
+    </EmptyState>}
 
     {/* Case: Apartment exists */}
     { !isLoading && !error && apartments.length > 0 && 

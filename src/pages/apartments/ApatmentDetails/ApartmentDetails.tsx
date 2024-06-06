@@ -30,7 +30,11 @@ const ApartmentDetails: React.FC = () => {
     { isLoading && !error && <Loading/> }
 
     {/* Case: No Apartment */}
-    { !isLoading && !error && !apartment && <EmptyState /> }
+    { !isLoading && !error && !apartment && 
+    <EmptyState text="Please Navigate to Apartments List" navigation={"/"}>
+      <span> no Apartment  </span>
+      <span style={{ display: 'block'}}> with this id: {id} </span>
+    </EmptyState> }
 
 
     {/* Case: Apartment exists */}
