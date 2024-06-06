@@ -7,14 +7,14 @@ This is a React web application that lists apartments fetched from an node.js AP
 
 - Apartment Listing: Users can see a huge list of apartments paginated
 - Apartment Details: Users can access each Apartment to get more details about it like
--- details: Reception, Rooms, bathrooms, kitchens
--- Money: Payment Types, Apartment Price
--- State: Finished, Finished Date if not finished
+  - Details: Reception, Rooms, bathrooms, kitchens
+  - Money: Payment Types, Apartment Price
+  - State: Finished, Finished Date if not finished
 - Cases Handled:
--- Empty State when no data found
--- Error handling when error occurs
--- Loading indicator
--- Page Not Found Handling
+  - Empty State when no data found
+  - Error handling when error occurs
+  - Loading indicator
+  - Page Not Found Handling
 
 ## App Screenshots
 
