@@ -1,7 +1,5 @@
 .image {
-  width: 80%; 
-  height: 80vh; 
-  /* background-size: cover; */
+  width: -webkit-fill-available;
 }
 
 .fieldTitle {
@@ -63,5 +61,5 @@
   border: 1px solid #254b64;
   border-radius: 5px;
   margin-right: 10px !important;
-
+  margin-bottom: 10px !important;
 }
