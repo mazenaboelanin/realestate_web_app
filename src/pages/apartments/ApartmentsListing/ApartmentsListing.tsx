@@ -7,7 +7,7 @@ import { ApartmentListCard } from "../../../components/ApartmentListCard/Apartme
 import { Loading } from "../../../components/Loading/Loading";
 import { EmptyState } from "../../../components/EmptyState/EmptyState";
 import { Error } from "../../../components/Error/Error";
-import { Box, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Container, Pagination, Stack, Typography } from "@mui/material";
 import { useFetch } from "../../../hooks/useFetch";
 
 
@@ -33,11 +33,12 @@ export const ApartmentsListing: React.FC = () => {
   return (
     <>
 
+<Container maxWidth="sm" style={{ minHeight: '70vh'}}>
+
     {
       !isLoading && !error && apartments.length > 0 &&
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px'}}>
         <Stack spacing={2} style={{ paddingTop: '16px'}}>
-        <Typography style={{ textAlign: 'center'}}>Page: {currentPage}</Typography>
         <Pagination count={metaData?.totalPages} page={currentPage} onChange={handleCurrentPageChange} />
         </Stack>
       </Box>
@@ -64,6 +65,8 @@ export const ApartmentsListing: React.FC = () => {
         </>
       )
     }
+
+    </Container>
     </>
   );
 };
