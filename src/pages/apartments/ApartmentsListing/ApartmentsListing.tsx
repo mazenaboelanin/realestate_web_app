@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import classes from "./ApartmentsListing.module.css";
-
 import Apartment from "../../../models/Apartment";
 import { ApartmentListCard } from "../../../components/ApartmentListCard/ApartmentListCard";
 import { Loading } from "../../../components/Loading/Loading";
 import { EmptyState } from "../../../components/EmptyState/EmptyState";
 import { Error } from "../../../components/Error/Error";
-import { Box, Button, Container, Pagination, Stack, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { useFetch } from "../../../hooks/useFetch";
-
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { FiltersAndSort } from "../../../components/FiltersAndSort/FiltersAndSort";
+import { PaginationWrapper } from "../../../components/PaginationWrapper/PaginationWrapper";
 
 const BASE_URL = 'http://localhost:5000/api/v1/apartments';
 const DEFAULT_URL = `${BASE_URL}?page=1&countPerPage=5`;
@@ -118,19 +113,21 @@ export const ApartmentsListing: React.FC = () => {
     <>
 <Container maxWidth="sm" style={{ minHeight: '70vh'}}>
     {/* FILTERING*/}
-    <FiltersAndSort handleFilterChange={handleFilterChange} handleOrderChange={handleOrderChange} handleApplyFiltersAndSort={handleApplyFiltersAndSort} />
+    <FiltersAndSort
+      handleFilterChange={handleFilterChange}
+      handleOrderChange={handleOrderChange}
+      handleApplyFiltersAndSort={handleApplyFiltersAndSort}
+    />
 
-      {/* PAGINATION */}
+    {/* PAGINATION */}
     {
       !isLoading && !error && apartments.length > 0 &&
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px'}}>
-        <Stack spacing={2} style={{ paddingTop: '16px'}}>
-        <Pagination count={metaData?.totalPages} page={currentPage} onChange={handleCurrentPageChange} />
-        </Stack>
-      </Box>
+      <PaginationWrapper
+        currentPage={currentPage}
+        totalPages={metaData?.totalPages}
+        handleCurrentPageChange={handleCurrentPageChange}
+      />
     }
-
-
 
     {/* Case: Error */}
     { !isLoading && error && <Error> { error?.message } </Error> }
