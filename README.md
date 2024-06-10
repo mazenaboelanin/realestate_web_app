@@ -5,7 +5,10 @@ This is a React web application that lists apartments fetched from an node.js AP
 
 ## Features
 
-- Apartment Listing: Users can see a huge list of apartments paginated
+- Apartment Listing:
+    - Users can see a huge list of apartments paginated
+    - Users can filter by: Area, Price
+    - Users can Order by: Date, Area, Price
 - Apartment Details: Users can access each Apartment to get more details about it like
   - Details: Reception, Rooms, bathrooms, kitchens
   - Money: Payment Types, Apartment Price
@@ -52,4 +55,4 @@ npm run start
 
 ## Future Plan
 
-- adding Filters to filter apartments according to areas, compounds and other criterias
+- adding Filters to filter apartments according to finsihed, compound
