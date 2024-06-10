@@ -12,7 +12,7 @@ import { FiltersAndSort } from "../../../components/FiltersAndSort/FiltersAndSor
 import { PaginationWrapper } from "../../../components/PaginationWrapper/PaginationWrapper";
 
 const BASE_URL = 'http://localhost:5000/api/v1/apartments';
-const DEFAULT_URL = `${BASE_URL}?page=1&countPerPage=5`;
+const COUNTER_PER_PAGE = 5;
 
 export const ApartmentsListing: React.FC = () => {
   const navigate = useNavigate();
@@ -20,13 +20,28 @@ export const ApartmentsListing: React.FC = () => {
   const queryParams = new URLSearchParams(location.search);
   const pageFromUrl = Number(queryParams.get('page')) || 1;
   const [currentPage, setCurrentPage] = useState(pageFromUrl);
-  const [url, setUrl] = useState(DEFAULT_URL);
+
+  const [url, setUrl] = useState(`${BASE_URL}?page=1&countPerPage=${COUNTER_PER_PAGE}`);
   const [area, setArea] = useState('');
   const [price, setPrice] = useState('');
   const [orderBy, setOrderBy] = useState({orderBy: '', orderType: ''});
 
   const handleCurrentPageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
+    let filters = getAllFilters();
+    let newUrl = `${BASE_URL}?page=${value}&countPerPage=${COUNTER_PER_PAGE}`;
+    if (filters) {
+      newUrl += `&filterBy=${JSON.stringify(filters)}`;
+    }
+
+    if (orderBy.orderBy && orderBy.orderType) {
+      newUrl +=`&orderBy=${JSON.stringify(orderBy)}`;
+    }
+  
+    if (url) {
+      setUrl(newUrl);
+    }
+
     queryParams.set('page', String(value));
     navigate({ search: queryParams.toString() });
   };
@@ -80,7 +95,7 @@ export const ApartmentsListing: React.FC = () => {
   const getAllFilters = () => {
     const areaFilterObject = prepareFilterObject(area);
     const priceFilterObject = prepareFilterObject(price);
-    let filters = {};
+    let filters = null;
     if(areaFilterObject.min && areaFilterObject.max) {
       filters = { area: areaFilterObject };
     }
@@ -93,19 +108,44 @@ export const ApartmentsListing: React.FC = () => {
   }
 
   const handleApplyFiltersAndSort = () => {
-    let newUrl = DEFAULT_URL;
     let filters = getAllFilters();
+    let newUrl = '';
 
-    if (filters) {
-      newUrl += `&filterBy=${JSON.stringify(filters)}`;
-    }
-
-    if (orderBy.orderBy && orderBy.orderType) {
-      newUrl +=`&orderBy=${JSON.stringify(orderBy)}`;
-    }
-  
-    if (url) {
+    // CLEAR FILTERS AND SORTING
+    if(filters === null && !(orderBy.orderBy && orderBy.orderType)) {
+      setCurrentPage(1);
+      newUrl = `${BASE_URL}?page=${1}&countPerPage=${COUNTER_PER_PAGE}`;
       setUrl(newUrl);
+      return;
+    }
+    
+
+    // APPLY FILTERS AND SORTING
+    if(filters || (orderBy.orderBy && orderBy.orderType)){
+      console.log('applyingg');
+      // Step 1: Delete the `page` parameter
+      if (queryParams.has('page')) {
+        queryParams.delete('page');
+      }
+      // Step 2: Update the browser's history
+      const initialUrl = `${window.location.pathname}`;
+      window.history.pushState({}, '', initialUrl);
+      console.log('initialUrl', initialUrl);
+
+      setCurrentPage(1);
+      newUrl = `${BASE_URL}?page=${1}&countPerPage=${COUNTER_PER_PAGE}`;
+
+      if (filters) {
+        newUrl += `&filterBy=${JSON.stringify(filters)}`;
+      }
+
+      if (orderBy.orderBy && orderBy.orderType) {
+        newUrl +=`&orderBy=${JSON.stringify(orderBy)}`;
+      }
+    
+      if (url) {
+        setUrl(newUrl);
+      }
     }
   }
 
